@@ -15,7 +15,7 @@ import IconUserNon from './UserNon.png';
 import IconUserActive from './UserActive.png';
 import IconSearch from './IconSearch.png';
 import IconSearchActive from './IconSearchActive.png';
-import Img1 from './Rectangle 313.png';
+import Img1 from './Img1.png';
 
 export {
   LogoMama,

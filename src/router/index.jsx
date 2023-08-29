@@ -21,6 +21,7 @@ import {
   IconUserActive,
   IconUserNon,
 } from '../assets';
+import {NavigationContainer} from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -88,28 +89,30 @@ const MainApp = () => {
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="Regiss">
-      <Stack.Screen
-        name="Loginn"
-        component={Loginn}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="MainApp"
-        component={MainApp}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="Splashh"
-        component={Splashh}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="Regiss"
-        component={Regiss}
-        options={{headerShown: false}}
-      />
-    </Stack.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Loginn">
+        <Stack.Screen
+          name="Loginn"
+          component={Loginn}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="MainApp"
+          component={MainApp}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Splashh"
+          component={Splashh}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Regiss"
+          component={Regiss}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
