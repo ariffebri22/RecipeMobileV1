@@ -1,11 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {Input} from '@rneui/base';
+import {ButtonCta} from '../../components';
+import {logout} from '../../store/action/auth';
+import {useDispatch} from 'react-redux';
 
 const Profilee = () => {
+  const dispatch = useDispatch();
   return (
     <View>
-      <Text>Profilee</Text>
+      <ButtonCta title="LOGOUT" onPress={() => dispatch(logout())} />
     </View>
   );
 };

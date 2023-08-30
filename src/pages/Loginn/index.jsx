@@ -4,7 +4,7 @@ import {BgSplash, LogoMamaKecil} from '../../assets';
 import {Input, Icon} from '@rneui/themed';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {logout, postlogin} from '../../store/action/auth';
+import {postlogin} from '../../store/action/auth';
 import Toast from 'react-native-toast-message';
 import {ButtonCta} from '../../components';
 

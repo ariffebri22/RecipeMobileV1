@@ -6,21 +6,43 @@ import {useNavigation} from '@react-navigation/native';
 import {Input, Icon} from '@rneui/themed';
 import {useDispatch, useSelector} from 'react-redux';
 import Toast from 'react-native-toast-message';
+import {register} from '../../store/action/auth';
+import {IconDefault} from '../../assets';
 
 const screenWidth = Dimensions.get('window').width;
 
 const Regiss = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const {messageError, isError, isLoading} = useSelector(state => state.login);
+  const {messageError, isError} = useSelector(state => state.regis);
   const [isFocused, setIsFocused] = useState(false);
   const [inputData, setInputData] = useState({
+    username: '',
     email: '',
     password: '',
   });
 
-  const handleLoginPress = () => {
-    navigation.replace('Splashh');
+  const fetchFileFromUrl = async (url, fileName, fileType) => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return new File([blob], fileName, {type: fileType});
+  };
+
+  const handleRegisPress = async () => {
+    const defaultPhotoFile = await fetchFileFromUrl(
+      IconDefault,
+      'default-photo.png',
+      'image/png',
+    );
+
+    const formData = new FormData();
+    formData.append('type', 'user');
+    formData.append('username', inputData.username);
+    formData.append('email', inputData.email);
+    formData.append('password', inputData.password);
+    formData.append('photo', defaultPhotoFile);
+
+    dispatch(register(formData, navigation));
   };
 
   const handleSignin = () => {
@@ -51,8 +73,8 @@ const Regiss = () => {
             {color: isFocused ? '#EFC81A' : '#222'},
           ]}
           placeholder="Username"
-          value={inputData.email}
-          onChangeText={text => setInputData({...inputData, email: text})}
+          value={inputData.username}
+          onChangeText={text => setInputData({...inputData, username: text})}
           onFocus={handleFocus}
           onBlur={handleBlur}
           leftIcon={
@@ -108,7 +130,7 @@ const Regiss = () => {
       <View style={styles.forgotCover}>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </View>
-      <ButtonCta title="REGISTER" onPress={handleLoginPress} />
+      <ButtonCta title="REGISTER" onPress={handleRegisPress} />
       <View style={styles.word}>
         <Text>
           <Text style={styles.dont}>Have an account? </Text>
@@ -117,6 +139,7 @@ const Regiss = () => {
           </Text>
         </Text>
       </View>
+      <Toast />
     </View>
   );
 };

@@ -16,6 +16,7 @@ import IconUserActive from './UserActive.png';
 import IconSearch from './IconSearch.png';
 import IconSearchActive from './IconSearchActive.png';
 import Img1 from './Img1.png';
+import IconDefault from './iconuser.png';
 
 export {
   LogoMama,
@@ -36,4 +37,5 @@ export {
   IconSearch,
   IconSearchActive,
   Img1,
+  IconDefault,
 };

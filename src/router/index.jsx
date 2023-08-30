@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
+import {UseSelector, useSelector} from 'react-redux';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
@@ -88,17 +89,15 @@ const MainApp = () => {
 };
 
 const Router = () => {
+  const login = useSelector(state => state.login);
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Loginn">
+        {/* {!login.data ? (
+          <> */}
         <Stack.Screen
           name="Loginn"
           component={Loginn}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="MainApp"
-          component={MainApp}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -111,6 +110,14 @@ const Router = () => {
           component={Regiss}
           options={{headerShown: false}}
         />
+        {/* </>
+        ) : ( */}
+        <Stack.Screen
+          name="MainApp"
+          component={MainApp}
+          options={{headerShown: false}}
+        />
+        {/* )} */}
       </Stack.Navigator>
     </NavigationContainer>
   );
