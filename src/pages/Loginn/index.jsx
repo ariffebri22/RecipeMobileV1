@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  ActivityIndicator,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {BgSplash, LogoMamaKecil} from '../../assets';
 import {Input, Icon} from '@rneui/themed';
@@ -104,7 +111,16 @@ const Loginn = () => {
       <View style={styles.forgotCover}>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </View>
-      <ButtonCta title="LOGIN" onPress={handleLoginPress} />
+      <ButtonCta
+        title={
+          isLoading ? (
+            <ActivityIndicator size="small" color="#ffffff" />
+          ) : (
+            'LOGIN'
+          )
+        }
+        onPress={handleLoginPress}
+      />
       <View style={styles.word}>
         <Text>
           <Text style={styles.dont}>Don’t have an account? </Text>

@@ -17,32 +17,22 @@ const Regiss = () => {
   const {messageError, isError} = useSelector(state => state.regis);
   const [isFocused, setIsFocused] = useState(false);
   const [inputData, setInputData] = useState({
+    type: 'user',
     username: '',
     email: '',
     password: '',
   });
 
-  const fetchFileFromUrl = async (url, fileName, fileType) => {
-    const response = await fetch(url);
-    const blob = await response.blob();
-    return new File([blob], fileName, {type: fileType});
+  const handleInput = (name, value) => {
+    setInputData({...inputData, [name]: value});
   };
 
-  const handleRegisPress = async () => {
-    const defaultPhotoFile = await fetchFileFromUrl(
-      IconDefault,
-      'default-photo.png',
-      'image/png',
-    );
-
-    const formData = new FormData();
-    formData.append('type', 'user');
-    formData.append('username', inputData.username);
-    formData.append('email', inputData.email);
-    formData.append('password', inputData.password);
-    formData.append('photo', defaultPhotoFile);
-
-    dispatch(register(formData, navigation));
+  const handleSubmit = async () => {
+    try {
+      dispatch(register(inputData, navigation));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSignin = () => {
@@ -130,7 +120,7 @@ const Regiss = () => {
       <View style={styles.forgotCover}>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </View>
-      <ButtonCta title="REGISTER" onPress={handleRegisPress} />
+      <ButtonCta title="REGISTER" onPress={handleSubmit} />
       <View style={styles.word}>
         <Text>
           <Text style={styles.dont}>Have an account? </Text>

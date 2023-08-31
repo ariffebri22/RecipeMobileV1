@@ -21,7 +21,7 @@ const login = (state = InitialState, {type, payload}) => {
         isLoading: false,
         isError: false,
         isSuccess: true,
-        data: payload.users,
+        data: payload,
       };
     case 'LOGIN_ERROR':
       return {

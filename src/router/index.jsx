@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
-import {UseSelector, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
@@ -94,31 +94,33 @@ const Router = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Loginn">
-        {/* {!login.data ? (
-          <> */}
-        <Stack.Screen
-          name="Loginn"
-          component={Loginn}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Splashh"
-          component={Splashh}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Regiss"
-          component={Regiss}
-          options={{headerShown: false}}
-        />
-        {/* </>
-        ) : ( */}
-        <Stack.Screen
-          name="MainApp"
-          component={MainApp}
-          options={{headerShown: false}}
-        />
-        {/* )} */}
+        {!login.data?.token ? (
+          <>
+            <Stack.Screen
+              name="Loginn"
+              component={Loginn}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="Regiss"
+              component={Regiss}
+              options={{headerShown: false}}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              name="Splashh"
+              component={Splashh}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="MainApp"
+              component={MainApp}
+              options={{headerShown: false}}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

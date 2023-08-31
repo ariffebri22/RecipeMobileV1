@@ -20,7 +20,7 @@ const Profilee = () => {
     });
 
     setTimeout(() => {
-      navigation.replace('Loginn');
+      dispatch(logout());
     }, 3000);
   };
 
