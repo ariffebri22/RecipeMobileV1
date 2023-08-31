@@ -3,14 +3,16 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Icon} from '@rneui/themed';
 import {
   Home,
   Loginn,
   Profilee,
-  Message,
+  SearchMenu,
   AddMenu,
   Splashh,
   Regiss,
+  DetailMenu,
 } from '../pages';
 import {
   IconAddActive,
@@ -45,6 +47,19 @@ const MainApp = () => {
         }}
       />
       <Tab.Screen
+        name="SearchMenu"
+        component={SearchMenu}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <Image
+              source={focused ? IconMessageActive : IconMessageNon}
+              style={{width: 30, height: 30, marginTop: 15}}
+            />
+          ),
+          tabBarLabel: '',
+        }}
+      />
+      <Tab.Screen
         name="AddMenu"
         component={AddMenu}
         options={{
@@ -58,19 +73,7 @@ const MainApp = () => {
           headerShown: false,
         }}
       />
-      <Tab.Screen
-        name="Message"
-        component={Message}
-        options={{
-          tabBarIcon: ({focused}) => (
-            <Image
-              source={focused ? IconMessageActive : IconMessageNon}
-              style={{width: 30, height: 30, marginTop: 15}}
-            />
-          ),
-          tabBarLabel: '',
-        }}
-      />
+
       <Tab.Screen
         name="Profilee"
         component={Profilee}
@@ -117,6 +120,11 @@ const Router = () => {
             <Stack.Screen
               name="MainApp"
               component={MainApp}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="DetailMenu"
+              component={DetailMenu}
               options={{headerShown: false}}
             />
           </>
