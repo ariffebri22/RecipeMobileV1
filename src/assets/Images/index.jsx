@@ -27,6 +27,7 @@ import ImgSpagheti from './Imgspagheti.jpg';
 import Icon1 from './Icon1.png';
 import Icon2 from './Icon2.png';
 import Icon3 from './Icon3.png';
+import ImgProfile from './ImgProfile.jpeg';
 
 export {
   LogoMama,
@@ -58,4 +59,5 @@ export {
   Icon1,
   Icon2,
   Icon3,
+  ImgProfile,
 };

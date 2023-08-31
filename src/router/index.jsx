@@ -82,6 +82,7 @@ const MainApp = () => {
             />
           ),
           tabBarLabel: '',
+          headerShown: false,
         }}
       />
     </Tab.Navigator>
