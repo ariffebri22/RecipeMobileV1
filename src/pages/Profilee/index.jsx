@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   ImgProfile: {
     width: 120,
     height: 120,
-    borderRadius: 84,
+    borderRadius: 100,
   },
 
   bar: {

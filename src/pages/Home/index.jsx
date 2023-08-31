@@ -19,7 +19,7 @@ const screenWidth = Dimensions.get('window').width;
 function Home() {
   return (
     <View style={styles.container}>
-      <InputSearch placeHolder="Search Pasta, Bread , etc" />
+      <InputSearch placeHolder="What are you cooking today?" />
       <View style={styles.row}>
         <Text style={{fontSize: 20, fontWeight: '600'}}>Popular Recipes</Text>
         <Text style={{fontSize: 16}}>Popular check</Text>
@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
   carousel: {
     flexDirection: 'row',
     marginTop: 15,
+    // height: 200,
     // overflow: 'visible',
   },
 
