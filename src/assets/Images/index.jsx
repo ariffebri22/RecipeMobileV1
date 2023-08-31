@@ -17,6 +17,16 @@ import IconSearch from './IconSearch.png';
 import IconSearchActive from './IconSearchActive.png';
 import Img1 from './Img1.png';
 import IconDefault from './iconuser.png';
+import ImgGado from './Imggadogado.jpg';
+import ImgStrawbery from './Imgstraberry.jpg';
+import ImgSpinach from './imgspinach.jpg';
+import ImgSate from './Imgsate.jpg';
+import ImgParfrait from './ImgParfrait.jpg';
+import ImgNasgor from './Imgnasigoreng.jpg';
+import ImgSpagheti from './Imgspagheti.jpg';
+import Icon1 from './Icon1.png';
+import Icon2 from './Icon2.png';
+import Icon3 from './Icon3.png';
 
 export {
   LogoMama,
@@ -38,4 +48,14 @@ export {
   IconSearchActive,
   Img1,
   IconDefault,
+  ImgGado,
+  ImgStrawbery,
+  ImgSpinach,
+  ImgSate,
+  ImgParfrait,
+  ImgNasgor,
+  ImgSpagheti,
+  Icon1,
+  Icon2,
+  Icon3,
 };

@@ -92,7 +92,7 @@ const Router = () => {
   const login = useSelector(state => state.login);
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Loginn">
+      <Stack.Navigator initialRouteName="MainApp">
         {/* {!login.data ? (
           <> */}
         <Stack.Screen

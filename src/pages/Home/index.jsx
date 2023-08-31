@@ -1,8 +1,18 @@
 import {StyleSheet, View, Dimensions, ScrollView} from 'react-native';
 import React from 'react';
 import {InputSearch} from '../../components';
-import {Text, Image} from '@rneui/base';
-import {Img1} from '../../assets';
+import {Text, BackgroundImage} from '@rneui/base';
+import {
+  ImgGado,
+  ImgNasgor,
+  ImgParfrait,
+  ImgSate,
+  ImgSpagheti,
+  ImgStrawbery,
+  Icon1,
+  Icon2,
+  Icon3,
+} from '../../assets';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -18,14 +28,16 @@ function Home() {
           style={styles.carousel}
           showsHorizontalScrollIndicator={false}>
           <View style={styles.box}>
-            <Image source={Img1}></Image>
-            <Text>Item 1</Text>
+            <BackgroundImage source={ImgGado} style={styles.Img} />
+            <Text style={styles.textImg}>Gado-gado</Text>
           </View>
           <View style={styles.box}>
-            <Text>Item 2</Text>
+            <BackgroundImage source={ImgNasgor} style={styles.Img} />
+            <Text style={styles.textImg}>Nasi Goreng</Text>
           </View>
           <View style={styles.box}>
-            <Text>Item 3</Text>
+            <BackgroundImage source={ImgSate} style={styles.Img} />
+            <Text style={styles.textImg}>Sate Ayam</Text>
           </View>
         </ScrollView>
       </View>
@@ -44,18 +56,29 @@ function Home() {
           horizontal={true}
           style={styles.carousel}
           showsHorizontalScrollIndicator={false}>
-          <View style={styles.square}>
-            <Image source={Img1}></Image>
-            <Text>Item 1</Text>
+          <View style={styles.IconCont}>
+            <View style={styles.square}>
+              <BackgroundImage source={Icon2} style={styles.Icon} />
+            </View>
+            <Text style={{marginTop: 5, fontSize: 15}}>Soup</Text>
           </View>
-          <View style={styles.square}>
-            <Text>Item 2</Text>
+          <View style={styles.IconCont}>
+            <View style={styles.square}>
+              <BackgroundImage source={Icon1} style={styles.Icon} />
+            </View>
+            <Text style={{marginTop: 5, fontSize: 15}}>Chicken</Text>
           </View>
-          <View style={styles.square}>
-            <Text>Item 3</Text>
+          <View style={styles.IconCont}>
+            <View style={styles.square}>
+              <BackgroundImage source={Icon3} style={styles.Icon} />
+            </View>
+            <Text style={{marginTop: 5, fontSize: 15}}>Seafood</Text>
           </View>
-          <View style={styles.square}>
-            <Text>Item 4</Text>
+          <View style={styles.IconCont}>
+            <View style={styles.square}>
+              <BackgroundImage source={Icon1} style={styles.Icon} />
+            </View>
+            <Text style={{marginTop: 5, fontSize: 15}}>Dessert</Text>
           </View>
         </ScrollView>
       </View>
@@ -66,21 +89,43 @@ function Home() {
           style={styles.carousel}
           showsHorizontalScrollIndicator={false}>
           <View style={styles.box1}>
-            <Image source={Img1}></Image>
-            <Text>Item 1</Text>
+            <BackgroundImage source={ImgParfrait} style={styles.Img1} />
+            <View style={styles.headTitle}>
+              <Text style={{fontSize: 16, fontWeight: '900', marginLeft: 10}}>
+                Parfrait Fruit
+              </Text>
+              <Text style={{fontSize: 12, fontWeight: '500', marginLeft: 10}}>
+                Parfaits are made of fruit...
+              </Text>
+            </View>
           </View>
           <View style={styles.box1}>
-            <Text>Item 2</Text>
+            <BackgroundImage source={ImgStrawbery} style={styles.Img1} />
+            <View style={styles.headTitle}>
+              <Text style={{fontSize: 16, fontWeight: '900', marginLeft: 10}}>
+                Strawberry Shortcake
+              </Text>
+              <Text style={{fontSize: 12, fontWeight: '500', marginLeft: 10}}>
+                This Shortcake made with...
+              </Text>
+            </View>
           </View>
           <View style={styles.box1}>
-            <Text>Item 3</Text>
+            <BackgroundImage source={ImgSpagheti} style={styles.Img1} />
+            <View style={styles.headTitle}>
+              <Text style={{fontSize: 16, fontWeight: '900', marginLeft: 10}}>
+                Spaghetti Carbonara
+              </Text>
+              <Text style={{fontSize: 12, fontWeight: '500', marginLeft: 10}}>
+                Delicious health food is...
+              </Text>
+            </View>
           </View>
         </ScrollView>
       </View>
     </View>
   );
 }
-export default Home;
 
 const styles = StyleSheet.create({
   container: {
@@ -91,37 +136,43 @@ const styles = StyleSheet.create({
 
   row: {
     alignItems: 'flex-start',
-    // flex: 1,
-    // backgroundColor: 'red',
     width: screenWidth,
     paddingLeft: 30,
     marginTop: 20,
-    // marginHorizontal: ,
+    // overflow: 'visible',
   },
 
   carousel: {
     flexDirection: 'row',
-    marginTop: 20,
+    marginTop: 15,
+    // overflow: 'visible',
   },
 
   box: {
     width: 260,
     height: 158,
     backgroundColor: 'lightgray',
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-start',
     marginRight: 20,
     borderRadius: 10,
+    overflow: 'hidden',
   },
 
   box1: {
     width: 180,
     height: 140,
     backgroundColor: 'lightgray',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     marginRight: 20,
     borderRadius: 10,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: {width: 20, height: 10},
+    shadowOpacity: 1,
+    shadowRadius: 20,
+    elevation: 20,
   },
 
   square: {
@@ -129,7 +180,48 @@ const styles = StyleSheet.create({
     height: 70,
     backgroundColor: 'lightgray',
     alignItems: 'center',
-    marginRight: 20,
+    // marginRight: 20,
     borderRadius: 10,
+    overflow: 'hidden',
+  },
+
+  Img: {
+    width: 260,
+    height: 158,
+    position: 'absolute',
+  },
+
+  Img1: {
+    width: 180,
+    height: 140,
+    position: 'absolute',
+  },
+
+  textImg: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: 'white',
+    marginLeft: 20,
+    marginBottom: 14,
+  },
+
+  Icon: {
+    width: 75,
+    height: 75,
+    position: 'absolute',
+  },
+
+  IconCont: {
+    alignItems: 'center',
+    marginRight: 20,
+  },
+
+  headTitle: {
+    width: 180,
+    height: 50,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
   },
 });
+
+export default Home;

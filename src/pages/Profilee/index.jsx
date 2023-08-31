@@ -7,7 +7,7 @@ import {useDispatch} from 'react-redux';
 const Profilee = () => {
   const dispatch = useDispatch();
   return (
-    <View>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <ButtonCta title="LOGOUT" onPress={() => dispatch(logout())} />
     </View>
   );
