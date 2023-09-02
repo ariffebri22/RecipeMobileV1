@@ -93,8 +93,11 @@ const SearchMenu = () => {
   const [allRecipes, setAllRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [currentData, setCurrentData] = useState([]);
-
   const itemsPerPage = 10;
+
+  useEffect(() => {
+    dispatch(getMenu());
+  }, []);
 
   const filterAndPaginateRecipes = (searchText, page) => {
     let filteredData = allRecipes;
@@ -171,10 +174,6 @@ const SearchMenu = () => {
       }
     }
   };
-
-  useEffect(() => {
-    dispatch(getMenu());
-  }, []);
 
   useEffect(() => {
     if (isSuccess) {

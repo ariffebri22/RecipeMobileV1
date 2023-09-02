@@ -1,6 +1,5 @@
-import InputUser from './InputUser';
-import InputPassword from './InputPassword';
 import ButtonCta from './ButtonCta';
-import InputSearch from './InputSearch';
+import {Popup} from './Popup';
+import {PopupImage} from './PopupImage';
 
-export {InputUser, InputPassword, ButtonCta, InputSearch};
+export {ButtonCta, Popup, PopupImage};

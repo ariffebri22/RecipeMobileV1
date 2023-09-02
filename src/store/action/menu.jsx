@@ -47,3 +47,58 @@ export const getMenu = () => async dispatch => {
     }
   }
 };
+
+export const addRecipe = dataREcipe => async dispatch => {
+  try {
+    const token = await AsyncStorage.getItem('token');
+    if (!token) {
+      throw new Error('Token not found in AsyncStorage');
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    };
+
+    dispatch({type: 'POST_RECIPE_REQUEST'});
+
+    const result = await axios.post(base_url + `recipe`, dataREcipe, {
+      headers,
+    });
+    console.log('result', result);
+
+    dispatch({
+      type: 'POST_RECIPE_SUCCESS',
+      payload: result.data.data,
+    });
+    Toast.show({
+      type: 'success',
+      text1: 'Recipe Successfully Added!',
+    });
+    dispatch(getMenu());
+  } catch (error) {
+    if (
+      error.response?.data?.message ===
+      'Login session expired, please login again'
+    ) {
+      Toast.show({
+        type: 'error',
+        text1: error.response.data.message,
+      });
+
+      setTimeout(() => {
+        dispatch(logout());
+      }, 4000);
+    } else {
+      dispatch({
+        type: 'POST_RECIPE_FAILED',
+        payload: error.response,
+      });
+      console.log(error);
+      Toast.show({
+        type: 'error',
+        text1: error.response.data.message,
+      });
+    }
+  }
+};

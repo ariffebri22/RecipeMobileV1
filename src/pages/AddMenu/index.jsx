@@ -1,9 +1,180 @@
-import {StyleSheet, View, TextInput} from 'react-native';
-import React from 'react';
-import {Input, Icon, Text} from '@rneui/themed';
-import {ButtonCta} from '../../components';
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Input, Icon, Text, Image} from '@rneui/themed';
+import {ButtonCta, Popup, PopupImage} from '../../components';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {useDispatch, useSelector} from 'react-redux';
+import {addRecipe} from '../../store/action/menu';
+import Toast from 'react-native-toast-message';
 
 const AddMenu = () => {
+  const dispatch = useDispatch();
+  let popupRef = React.createRef();
+  let popupRefImage = React.createRef();
+  const [picture, setPicture] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [title, setTitle] = useState('');
+  const [ingredients, setIngredients] = useState('');
+  const {isLoading} = useSelector(state => state.postMenu);
+
+  const onShowPopup = () => {
+    popupRef.show();
+  };
+
+  const onClosePopup = () => {
+    popupRef.close();
+  };
+
+  const onShowPopupImage = () => {
+    popupRefImage.show();
+  };
+
+  const onClosePopupImage = () => {
+    popupRefImage.close();
+  };
+
+  const handleCamera = async () => {
+    let options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    await launchCamera(options, res => {
+      if (res.didCancel) {
+        console.log('Access camera denied');
+      } else if (res.error) {
+        console.log('Something wrong at ImagePicker', res.errorMessage);
+      } else {
+        if (res.assets && res.assets.length > 0) {
+          // Validasi tipe file gambar
+          if (
+            res.assets[0].type === 'image/png' ||
+            res.assets[0].type === 'image/jpeg'
+          ) {
+            setPicture(res.assets[0]);
+          } else {
+            console.log('Invalid image file type');
+            // Tampilkan pesan kesalahan jika tipe file tidak sesuai
+          }
+        }
+      }
+    });
+  };
+
+  const handleLibrary = async () => {
+    let options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    await launchImageLibrary(options, res => {
+      if (res.didCancel) {
+        console.log('Access gallery denied');
+      } else if (res.error) {
+        console.log('Something wrong at ImagePicker', res.errorMessage);
+      } else {
+        if (res.assets && res.assets.length > 0) {
+          // Validasi tipe file gambar
+          if (
+            res.assets[0].type === 'image/png' ||
+            res.assets[0].type === 'image/jpeg'
+          ) {
+            setPicture(res.assets[0]);
+          } else {
+            console.log('Invalid image file type');
+            // Tampilkan pesan kesalahan jika tipe file tidak sesuai
+          }
+        }
+      }
+    });
+  };
+
+  const onCategorySelect = category => {
+    setSelectedCategory(category);
+    onClosePopup();
+  };
+
+  const popupListImage = [
+    {
+      id: 1,
+      name: 'Camera',
+      onPress: handleCamera,
+    },
+    {
+      id: 2,
+      name: 'Gallery',
+      onPress: handleLibrary,
+    },
+  ];
+
+  const popupList = [
+    {
+      id: 1,
+      name: 'Appetizers',
+    },
+    {
+      id: 2,
+      name: 'Main Course',
+    },
+    {
+      id: 3,
+      name: 'Dessert',
+    },
+  ];
+
+  const onPostButtonPress = () => {
+    if (!title || !selectedCategory || !picture || !ingredients) {
+      Toast.show({
+        type: 'error',
+        text1: 'No Data Added',
+        text2: 'Please enter the recipe data first',
+      });
+      return;
+    }
+
+    if (!selectedCategory || ![1, 2, 3].includes(selectedCategory.id)) {
+      Toast.show({
+        type: 'error',
+        text1: 'Invalid Category',
+        text2:
+          'Category must be 1 (Appetizers), 2 (Main Course), or 3 (Dessert).',
+      });
+      return; // Berhenti jika validasi gagal
+    }
+
+    const dataRecipe = new FormData();
+    dataRecipe.append('title', title);
+    dataRecipe.append('ingredients', ingredients);
+
+    if (selectedCategory) {
+      dataRecipe.append('category_id', parseInt(selectedCategory.id));
+    }
+
+    if (picture) {
+      dataRecipe.append('photo', {
+        uri: picture.uri,
+        type: picture.type,
+        name: picture.fileName,
+      });
+    }
+
+    dispatch(addRecipe(dataRecipe));
+    setTimeout(() => {
+      setTitle(''); // Mengosongkan input Title
+      setIngredients(''); // Mengosongkan input Ingredients
+      setPicture(null); // Mengosongkan gambar
+      setSelectedCategory(null); // Mengosongkan kategori
+    }, 3000);
+  };
+
   return (
     <View style={styles.container}>
       <Text
@@ -11,14 +182,41 @@ const AddMenu = () => {
           fontSize: 30,
           color: '#EFC81A',
           fontWeight: '700',
-          marginTop: 80,
+          marginTop: 40,
           marginBottom: 30,
         }}>
         Add Your Recipe
       </Text>
+
+      <View style={styles.addPhoto}>
+        {picture ? (
+          <View>
+            <Image source={{uri: picture.uri}} style={styles.addPhotoImage} />
+            <TouchableOpacity
+              onPress={onShowPopupImage}
+              style={styles.changePhotoButton}>
+              <Text style={{color: 'white', fontSize: 13}}>Change Photo</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <TouchableOpacity onPress={onShowPopupImage}>
+            <Icon
+              type="MaterialIcons"
+              name="add-a-photo"
+              size={40}
+              color="#8B8A8F"
+            />
+            <Text style={{color: '#8B8A8F', fontSize: 13}}>
+              Add your best picture.
+            </Text>
+          </TouchableOpacity>
+        )}
+      </View>
       <Input
         inputContainerStyle={styles.input}
         placeholder="Title"
+        value={title} // Mengikuti nilai state title
+        onChangeText={text => setTitle(text)} // Mengubah state title saat ada perubahan input
         leftIcon={
           <Icon
             marginLeft={10}
@@ -29,14 +227,46 @@ const AddMenu = () => {
           />
         }
       />
-      <Input
-        inputContainerStyle={styles.input}
+
+      <TextInput
+        style={styles.textInput}
+        multiline
+        numberOfLines={4}
         placeholder="Ingredients"
-        numberOfLines={6}
+        value={ingredients}
+        onChangeText={text => setIngredients(text)}
+        textAlign="left"
+        placeholderTextColor="#8B8A8F"
       />
-      <Input inputContainerStyle={styles.input} placeholder="Add Photo" />
-      <Input inputContainerStyle={styles.input} placeholder="Category" />
-      <ButtonCta title="POST" />
+      <TouchableOpacity onPress={onShowPopup} style={styles.category}>
+        <Text style={{fontSize: 18, color: '#8B8A8F', marginLeft: 15}}>
+          {selectedCategory ? selectedCategory.name : 'Category'}
+        </Text>
+      </TouchableOpacity>
+      <Popup
+        title="Category"
+        ref={target => (popupRef = target)}
+        onTouchOutside={onClosePopup}
+        data={popupList}
+        onSelect={item => onCategorySelect(item)}
+      />
+      <PopupImage
+        title="Select Image from..."
+        ref={target => (popupRefImage = target)}
+        onTouchOutside={onClosePopupImage}
+        data={popupListImage}
+      />
+      <ButtonCta
+        title={
+          isLoading ? (
+            <ActivityIndicator size="small" color="#ffffff" />
+          ) : (
+            'POST'
+          )
+        }
+        onPress={onPostButtonPress}
+      />
+      <Toast />
     </View>
   );
 };
@@ -54,5 +284,59 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
     borderRadius: 10,
     marginHorizontal: 20,
+  },
+
+  textInput: {
+    borderWidth: 1,
+    // padding: 0,
+    fontSize: 16,
+    backgroundColor: '#F5F5F5',
+    borderRadius: 10,
+    marginHorizontal: 20,
+    width: 328,
+    marginBottom: 25,
+    borderColor: '#8B8A8F',
+    paddingLeft: 15,
+  },
+
+  category: {
+    height: 50,
+    width: 328,
+    borderWidth: 1,
+    backgroundColor: '#F5F5F5',
+    borderRadius: 10,
+    marginBottom: 20,
+    borderColor: '#8B8A8F',
+    justifyContent: 'center',
+  },
+
+  addPhoto: {
+    width: 328,
+    height: 200,
+    borderWidth: 1,
+    borderColor: '#8B8A8F',
+    marginBottom: 25,
+    borderRadius: 10,
+    borderStyle: 'dashed',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  addPhotoImage: {
+    width: 328,
+    height: 200,
+    borderRadius: 10,
+  },
+
+  changePhotoButton: {
+    backgroundColor: '#EFC81A',
+    width: 120,
+    height: 30,
+    position: 'absolute',
+    marginHorizontal: 100,
+    marginVertical: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 6,
   },
 });
