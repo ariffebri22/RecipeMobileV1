@@ -36,7 +36,7 @@ const Items = ({
           marginLeft: 30,
         }}>
         <Image
-          onPress={() => navigation.navigate('DetailMenu', {itemId: id})}
+          onPress={() => navigation.push('DetailMenu', {itemId: id})}
           style={{height: 100, width: 100, borderRadius: 10}}
           source={{uri: photo}}
         />
@@ -47,7 +47,7 @@ const Items = ({
             marginLeft: 10,
           }}>
           <Text
-            onPress={() => navigation.navigate('DetailMenu', {itemId: id})}
+            onPress={() => navigation.push('DetailMenu', {itemId: id})}
             style={{fontSize: 16, fontWeight: 'bold'}}>
             {title}
           </Text>
@@ -85,7 +85,7 @@ const SearchMenu = () => {
   const [searchMenu, setSearchMenu] = useState('');
   const [recipes, setRecipes] = useState(null);
   const {getMenuReducers} = useSelector(state => state);
-  const {data, messageError, isLoading, isSuccess, isError} = getMenuReducers;
+  const {data, isSuccess} = getMenuReducers;
   const [currentPage, setCurrentPage] = useState(1);
   const [focusedItem, setFocusedItem] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('All');

@@ -28,6 +28,10 @@ import Icon1 from './Icon1.png';
 import Icon2 from './Icon2.png';
 import Icon3 from './Icon3.png';
 import ImgProfile from './ImgProfile.jpeg';
+import IconBookmark from './IconBookmark.png';
+import IconBookmarkActive from './IconBookmarkActive.png';
+import IconLike from './IconLike.png';
+import IconLikeActive from './IconLikeActive.png';
 
 export {
   LogoMama,
@@ -60,4 +64,8 @@ export {
   Icon2,
   Icon3,
   ImgProfile,
+  IconBookmark,
+  IconBookmarkActive,
+  IconLike,
+  IconLikeActive,
 };
