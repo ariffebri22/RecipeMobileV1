@@ -6,16 +6,16 @@ const InitialState = {
   isSuccess: true,
 };
 
-const getMenuById = (state = InitialState, {type, payload}) => {
+const getMenuByUsers = (state = InitialState, {type, payload}) => {
   switch (type) {
-    case 'GET_MENU_DETAILS_REQUEST':
+    case 'GET_MENU_USERS_REQUEST':
       return {
         ...state,
         isLoading: true,
         isError: false,
         isSuccess: false,
       };
-    case 'GET_MENU_DETAILS_SUCCESS':
+    case 'GET_MENU_USERS_SUCCESS':
       return {
         ...state,
         isLoading: false,
@@ -23,7 +23,7 @@ const getMenuById = (state = InitialState, {type, payload}) => {
         isSuccess: true,
         data: payload,
       };
-    case 'GET_MENU_DETAILS_ERROR':
+    case 'GET_MENU_USERS_ERROR':
       return {
         ...state,
         isLoading: false,
@@ -36,4 +36,4 @@ const getMenuById = (state = InitialState, {type, payload}) => {
   }
 };
 
-export default getMenuById;
+export default getMenuByUsers;

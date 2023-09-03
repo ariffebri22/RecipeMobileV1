@@ -89,6 +89,100 @@ export const getMenuDetails = id => async dispatch => {
   }
 };
 
+export const getMenuUsers = id => async dispatch => {
+  try {
+    const token = await AsyncStorage.getItem('token');
+    if (!token) {
+      throw new Error('Token not found in AsyncStorage');
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    dispatch({type: 'GET_MENU_USERS_REQUEST'});
+
+    const response = await axios.get(base_url + `recipe/users/${id}`, {
+      headers,
+    });
+
+    if (response.data && response.data.message) {
+      dispatch({type: 'GET_MENU_USERS_SUCCESS', payload: response.data});
+      console.log('Success');
+    } else {
+      console.log('Invalid response data:', response.data);
+    }
+  } catch (err) {
+    console.error('Error:', err);
+
+    if (
+      err.response?.data?.message ===
+      'Login session expired, please login again'
+    ) {
+      Toast.show({
+        type: 'error',
+        text1: err.response.data.message,
+      });
+
+      setTimeout(() => {
+        dispatch(logout());
+      }, 4000);
+    } else {
+      dispatch({
+        type: 'GET_MENU_USERS_ERROR',
+        payload: err.response.data.message,
+      });
+    }
+  }
+};
+
+export const deleteRecipe = id => async dispatch => {
+  try {
+    const token = await AsyncStorage.getItem('token');
+    if (!token) {
+      throw new Error('Token not found in AsyncStorage');
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    dispatch({type: 'DELETE_MENU_REQUEST'});
+
+    const response = await axios.delete(base_url + `recipe/${id}`, {headers});
+
+    if (response.data && response.data.message) {
+      dispatch({type: 'DELETE_MENU_SUCCESS', payload: response.data});
+      console.log('Success');
+      Toast.show({
+        type: 'success',
+        text1: 'Recipe Successfully Deleted!',
+      });
+      dispatch(getMenuUsers(id));
+    } else {
+      console.log('Invalid response data:', response.data);
+    }
+  } catch (err) {
+    console.error('Error:', err);
+
+    if (
+      err.response?.data?.message ===
+      'Login session expired, please login again'
+    ) {
+      Toast.show({
+        type: 'error',
+        text1: err.response.data.message,
+      });
+
+      setTimeout(() => {
+        dispatch(logout());
+      }, 4000);
+    } else {
+      dispatch({type: 'DELETE_MENU_ERROR', payload: err.message});
+    }
+  }
+};
+
 export const addRecipe = dataREcipe => async dispatch => {
   try {
     const token = await AsyncStorage.getItem('token');

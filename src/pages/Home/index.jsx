@@ -5,12 +5,12 @@ import {
   ScrollView,
   FlatList,
   SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import {InputSearch} from '../../components';
-import {useDispatch} from 'react-redux';
-import {Text, BackgroundImage} from '@rneui/base';
-import {Input, Icon, SearchBar, Image} from '@rneui/themed';
+import {useDispatch, useSelector} from 'react-redux';
+import {BackgroundImage} from '@rneui/base';
+import {Input, Icon, SearchBar, Image, Text} from '@rneui/themed';
 import axios from 'axios';
 import {
   ImgGado,
@@ -22,14 +22,55 @@ import {
   Icon1,
   Icon2,
   Icon3,
+  Hello,
 } from '../../assets';
 import {useNavigation} from '@react-navigation/native';
 
 const screenWidth = Dimensions.get('window').width;
 
 function Home() {
+  const navigation = useNavigation();
+  const login = useSelector(state => state.login);
+
+  const handleCta = () => {
+    navigation.navigate('SearchMenu');
+  };
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
+      <View
+        style={{
+          width: '100%',
+          paddingHorizontal: 30,
+          height: 150,
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+          overflow: 'hidden',
+          shadowColor: 'black',
+        }}>
+        <View style={{justifyContent: 'center'}}>
+          <Text style={{fontSize: 20}}>Hi, {login.data.username} !</Text>
+          <Text style={{fontSize: 15}}>What are you cooking today?</Text>
+          <TouchableOpacity
+            onPress={handleCta}
+            style={{
+              backgroundColor: '#EFC81A',
+              borderRadius: 6,
+              height: 30,
+              width: 90,
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 10,
+            }}>
+            <Text style={{color: 'white'}}>Let's cook !</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{justifyContent: 'center'}}>
+          <Image
+            source={Hello}
+            style={{width: 110, height: 110, marginTop: 10}}
+          />
+        </View>
+      </View>
       <View style={styles.row}>
         <Text style={{fontSize: 20, fontWeight: '600'}}>Popular Recipes</Text>
         <Text style={{fontSize: 16}}>Popular check</Text>
@@ -93,7 +134,7 @@ function Home() {
         </ScrollView>
       </View>
       <View style={styles.row}>
-        <Text style={{fontSize: 20, fontWeight: '600'}}>Popular Recipes</Text>
+        <Text style={{fontSize: 20, fontWeight: '600'}}>Popular For You</Text>
         <ScrollView
           horizontal={true}
           style={styles.carousel}
@@ -133,7 +174,7 @@ function Home() {
           </View>
         </ScrollView>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -141,14 +182,14 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FCFCFC',
     flex: 1,
-    alignItems: 'center',
+    // alignItems: 'center',
   },
 
   row: {
     alignItems: 'flex-start',
     width: screenWidth,
     paddingLeft: 30,
-    marginTop: 20,
+    marginBottom: 15,
     // overflow: 'visible',
   },
 

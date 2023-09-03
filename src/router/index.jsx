@@ -13,6 +13,11 @@ import {
   Splashh,
   Regiss,
   DetailMenu,
+  EditMenu,
+  MyRecipe,
+  EditProfile,
+  SavedRecipe,
+  LikedRecipe,
 } from '../pages';
 import {
   IconAddActive,
@@ -126,6 +131,31 @@ const Router = () => {
             <Stack.Screen
               name="DetailMenu"
               component={DetailMenu}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="MyRecipe"
+              component={MyRecipe}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="EditMenu"
+              component={EditMenu}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="EditProfile"
+              component={EditProfile}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="SavedRecipe"
+              component={SavedRecipe}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="LikedRecipe"
+              component={LikedRecipe}
               options={{headerShown: false}}
             />
           </>

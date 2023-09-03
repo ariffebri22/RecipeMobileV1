@@ -34,6 +34,7 @@ const DetailMenu = ({route}) => {
   const title = data?.data?.title || '';
   const creator = data?.data?.creator || '';
   const ingredients = data?.data?.ingredients || '';
+  const photo = data?.data?.photo || '';
 
   const toggleLike = () => {
     setLiked(!liked);
@@ -45,7 +46,7 @@ const DetailMenu = ({route}) => {
 
   return (
     <View style={styles.container}>
-      <Image source={{uri: data?.data?.photo}} style={styles.ImgMenu} />
+      <Image source={{uri: photo}} style={styles.ImgMenu} />
       <View style={{width: '100%', height: '55%'}}>
         <View style={styles.bgImg}></View>
         <View style={{alignItems: 'flex-start'}}>

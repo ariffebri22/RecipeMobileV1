@@ -1,19 +1,29 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
-import {ButtonCta} from '../../components';
 import {logout} from '../../store/action/auth';
-import {useDispatch} from 'react-redux';
-import {ImgProfile} from '../../assets';
+import {useDispatch, useSelector} from 'react-redux';
 import {Text, Image} from '@rneui/base';
 import {Icon} from '@rneui/themed';
 import {useNavigation} from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
+import {Modal1} from '../../components';
 
 const Profilee = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const login = useSelector(state => state.login);
+  let popupRef = React.createRef();
+
+  const onShowPopup = () => {
+    popupRef.show();
+  };
+
+  const onClosePopup = () => {
+    popupRef.close();
+  };
 
   const handleLogout = () => {
+    onClosePopup();
     Toast.show({
       type: 'success',
       text1: 'Adios👋',
@@ -21,13 +31,13 @@ const Profilee = () => {
 
     setTimeout(() => {
       dispatch(logout());
-    }, 3000);
+    }, 1000);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.head}>
-        <Image source={ImgProfile} style={styles.ImgProfile} />
+        <Image source={{uri: login.data.photo}} style={styles.ImgProfile} />
         <Text
           style={{
             fontSize: 25,
@@ -36,7 +46,7 @@ const Profilee = () => {
             marginTop: 10,
             marginBottom: 20,
           }}>
-          Kim Jihyo
+          {login.data.username}
         </Text>
       </View>
       <View style={styles.cover}>
@@ -85,6 +95,9 @@ const Profilee = () => {
               name="chevron-right"
               size={35}
               color="#8C8C8C"
+              onPress={() =>
+                navigation.push('MyRecipe', {itemId: login.data.id})
+              }
             />
           </View>
         </View>
@@ -148,7 +161,7 @@ const Profilee = () => {
             />
             <Text
               style={{color: '#ff6666', fontSize: 20}}
-              onPress={handleLogout}>
+              onPress={onShowPopup}>
               Logout
             </Text>
           </View>
@@ -156,6 +169,13 @@ const Profilee = () => {
         </View>
       </View>
       <Toast />
+      <Modal1
+        title="Logout"
+        message={`Are you sure want to logout?`}
+        ref={target => (popupRef = target)}
+        onTouchOutside={onClosePopup}
+        onPress={handleLogout}
+      />
     </View>
   );
 };

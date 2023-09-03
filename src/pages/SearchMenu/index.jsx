@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
+import {ImgProfile, iconuser} from '../../assets';
 import React, {useState, useEffect} from 'react';
 import {Icon, SearchBar, Image} from '@rneui/themed';
 import {useDispatch, useSelector} from 'react-redux';
@@ -14,6 +15,8 @@ import {useNavigation} from '@react-navigation/native';
 import {getMenu} from '../../store/action/menu';
 
 const screenWidth = Dimensions.get('window').width;
+const iconDefault =
+  'https://www.nicepng.com/png/detail/304-3040148_foodtong-chef-icon-epens-box-tentara-pelajar.png';
 
 const Items = ({
   id,
@@ -66,9 +69,7 @@ const Items = ({
               marginTop: 15,
             }}>
             <Image
-              source={{
-                uri: creator_photo !== null ? creator_photo : ImgProfile,
-              }}
+              source={{uri: creator_photo}}
               style={{height: 28, width: 28, borderRadius: 50}}
             />
             <Text style={{marginLeft: 5}}>{creator}</Text>
