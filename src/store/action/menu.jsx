@@ -237,3 +237,60 @@ export const addRecipe = dataREcipe => async dispatch => {
     }
   }
 };
+
+export const updateMenu = (id, data) => async dispatch => {
+  try {
+    const token = await AsyncStorage.getItem('token');
+    if (!token) {
+      throw new Error('Token not found in AsyncStorage');
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    };
+
+    dispatch({type: 'PUT_RECIPE_REQUEST'});
+
+    const result = await axios.put(base_url + `recipe/${id}`, data, {
+      headers,
+    });
+    console.log('result', result);
+
+    dispatch({
+      type: 'PUT_RECIPE_SUCCESS',
+      payload: result.data.data,
+    });
+    Toast.show({
+      type: 'success',
+      text1: 'Success',
+      text2: 'Recipe Successfully Edited!',
+    });
+    dispatch(getMenu());
+    dispatch(getMenuDetails(id));
+  } catch (error) {
+    if (
+      error.response?.data?.message ===
+      'Login session expired, please login again'
+    ) {
+      Toast.show({
+        type: 'error',
+        text1: error.response.data.message,
+      });
+
+      setTimeout(() => {
+        dispatch(logout());
+      }, 4000);
+    } else {
+      dispatch({
+        type: 'PUT_RECIPE_FAILED',
+        payload: error.response,
+      });
+      console.log(error);
+      Toast.show({
+        type: 'error',
+        text1: error.response.data.message,
+      });
+    }
+  }
+};

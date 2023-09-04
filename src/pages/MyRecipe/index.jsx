@@ -108,6 +108,7 @@ const Items = ({id, photo, title, category, creator, creator_photo}) => {
               alignItems: 'center',
             }}>
             <TouchableOpacity
+              onPress={() => navigation.push('EditMenu', {itemId: id})}
               style={{
                 backgroundColor: '#30C0F3',
                 width: '80%',
@@ -200,10 +201,10 @@ const MyRecipe = () => {
       {isError ? (
         <Text>Anda belum memiliki recipe</Text>
       ) : (
-        <ScrollView style={styles.content}>
+        <View style={styles.content}>
           {data.data && data.data.length > 0 ? (
             <FlatList
-              marginBottom={100}
+              marginBottom={200}
               data={data.data}
               renderItem={({item}) => (
                 <Items
@@ -220,7 +221,7 @@ const MyRecipe = () => {
           ) : (
             <Text>Anda belum memiliki recipe</Text>
           )}
-        </ScrollView>
+        </View>
       )}
       <Toast />
     </View>

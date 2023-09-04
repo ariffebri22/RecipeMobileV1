@@ -357,7 +357,7 @@ const SearchMenu = () => {
           </TouchableOpacity>
         </ScrollView>
       </View>
-      <ScrollView>
+      <View style={{marginBottom: 200}}>
         <FlatList
           data={recipes}
           renderItem={renderItem}
@@ -391,7 +391,7 @@ const SearchMenu = () => {
             <Icon type="feather" name="chevron-right" size={30} color="white" />
           </TouchableOpacity>
         </View>
-      </ScrollView>
+      </View>
     </View>
   );
 };

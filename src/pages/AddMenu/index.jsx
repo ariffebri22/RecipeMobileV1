@@ -53,7 +53,6 @@ const AddMenu = () => {
         console.log('Something wrong at ImagePicker', res.errorMessage);
       } else {
         if (res.assets && res.assets.length > 0) {
-          // Validasi tipe file gambar
           if (
             res.assets[0].type === 'image/png' ||
             res.assets[0].type === 'image/jpeg'
@@ -61,7 +60,6 @@ const AddMenu = () => {
             setPicture(res.assets[0]);
           } else {
             console.log('Invalid image file type');
-            // Tampilkan pesan kesalahan jika tipe file tidak sesuai
           }
         }
       }
@@ -82,7 +80,6 @@ const AddMenu = () => {
         console.log('Something wrong at ImagePicker', res.errorMessage);
       } else {
         if (res.assets && res.assets.length > 0) {
-          // Validasi tipe file gambar
           if (
             res.assets[0].type === 'image/png' ||
             res.assets[0].type === 'image/jpeg'
@@ -90,7 +87,6 @@ const AddMenu = () => {
             setPicture(res.assets[0]);
           } else {
             console.log('Invalid image file type');
-            // Tampilkan pesan kesalahan jika tipe file tidak sesuai
           }
         }
       }
@@ -147,7 +143,7 @@ const AddMenu = () => {
         text2:
           'Category must be 1 (Appetizers), 2 (Main Course), or 3 (Dessert).',
       });
-      return; // Berhenti jika validasi gagal
+      return;
     }
 
     const dataRecipe = new FormData();
@@ -168,11 +164,11 @@ const AddMenu = () => {
 
     dispatch(addRecipe(dataRecipe));
     setTimeout(() => {
-      setTitle(''); // Mengosongkan input Title
-      setIngredients(''); // Mengosongkan input Ingredients
-      setPicture(null); // Mengosongkan gambar
-      setSelectedCategory(null); // Mengosongkan kategori
-    }, 3000);
+      setTitle('');
+      setIngredients('');
+      setPicture(null);
+      setSelectedCategory(null);
+    }, 2000);
   };
 
   return (
@@ -215,8 +211,8 @@ const AddMenu = () => {
       <Input
         inputContainerStyle={styles.input}
         placeholder="Title"
-        value={title} // Mengikuti nilai state title
-        onChangeText={text => setTitle(text)} // Mengubah state title saat ada perubahan input
+        value={title}
+        onChangeText={text => setTitle(text)}
         leftIcon={
           <Icon
             marginLeft={10}
