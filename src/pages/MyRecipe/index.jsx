@@ -199,7 +199,7 @@ const MyRecipe = () => {
       </View>
 
       {isError ? (
-        <Text>Anda belum memiliki recipe</Text>
+        <Text>Recipe not found</Text>
       ) : (
         <View style={styles.content}>
           {data.data && data.data.length > 0 ? (
@@ -219,7 +219,7 @@ const MyRecipe = () => {
               )}
             />
           ) : (
-            <Text>Anda belum memiliki recipe</Text>
+            <Text>Recipe not found</Text>
           )}
         </View>
       )}

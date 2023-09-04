@@ -71,6 +71,7 @@ const Profilee = () => {
               name="chevron-right"
               size={35}
               color="#8C8C8C"
+              onPress={() => navigation.push('EditProfile')}
             />
           </View>
         </View>
@@ -122,6 +123,7 @@ const Profilee = () => {
               name="chevron-right"
               size={35}
               color="#8C8C8C"
+              onPress={() => navigation.push('SavedRecipe')}
             />
           </View>
         </View>
@@ -135,7 +137,7 @@ const Profilee = () => {
               size={35}
               color="rgba(239, 200, 26, 1)"
             />
-            <Text style={{color: 'rgba(0, 0, 0, 0.70);', fontSize: 20}}>
+            <Text style={{color: 'rgba(0, 0, 0, 0.70)', fontSize: 20}}>
               Liked Recipe
             </Text>
           </View>
@@ -146,6 +148,7 @@ const Profilee = () => {
               name="chevron-right"
               size={35}
               color="#8C8C8C"
+              onPress={() => navigation.push('LikedRecipe')}
             />
           </View>
         </View>

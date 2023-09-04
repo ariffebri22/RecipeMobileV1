@@ -198,8 +198,10 @@ const EditMenu = ({route, navigation}) => {
           fontWeight: '700',
           marginTop: 40,
           marginBottom: 30,
+          marginHorizontal: 30,
+          textAlign: 'center',
         }}>
-        Update
+        Update Recipe
       </Text>
 
       <View style={styles.addPhoto}>

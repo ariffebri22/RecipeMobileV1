@@ -8,6 +8,7 @@ import getMenuById from './getMenuById';
 import getMenuByUsers from './getMenuByUsers';
 import putMenu from './putMenu';
 import deleteMenu from './deleteMenu';
+import putProfile from './putProfile';
 
 const appReducers = combineReducers({
   login,
@@ -18,6 +19,7 @@ const appReducers = combineReducers({
   getMenuByUsers,
   putMenu,
   deleteMenu,
+  putProfile,
 });
 
 export default appReducers;

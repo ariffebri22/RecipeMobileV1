@@ -294,3 +294,64 @@ export const updateMenu = (id, data) => async dispatch => {
     }
   }
 };
+
+export const updateProfile = (id, data) => async dispatch => {
+  try {
+    const token = await AsyncStorage.getItem('token');
+    if (!token) {
+      throw new Error('Token not found in AsyncStorage');
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    };
+
+    dispatch({type: 'PUT_PROFILE_REQUEST'});
+
+    const result = await axios.put(base_url + `users/${id}`, data, {
+      headers,
+    });
+    console.log('result', result);
+
+    dispatch({
+      type: 'PUT_PROFILE_SUCCESS',
+      payload: result.data.data,
+    });
+    Toast.show({
+      type: 'success',
+      text1: 'Success',
+      text2: 'Please login again for update',
+    });
+    setTimeout(() => {
+      dispatch(logout());
+    }, 2000);
+  } catch (error) {
+    if (
+      error.response?.data?.message ===
+      'Login session expired, please login again'
+    ) {
+      Toast.show({
+        type: 'error',
+        text1: error.response.data.message,
+      });
+
+      setTimeout(() => {
+        dispatch(logout());
+      }, 4000);
+    } else {
+      dispatch({
+        type: 'PUT_PROFILE_FAILED',
+        payload: error.response,
+      });
+      console.log(error);
+      console.log(id);
+      console.log(data);
+      // console.log(token);
+      Toast.show({
+        type: 'error',
+        text1: error.response.data.message,
+      });
+    }
+  }
+};
