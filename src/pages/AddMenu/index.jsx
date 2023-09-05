@@ -73,6 +73,7 @@ const AddMenu = () => {
         path: 'images',
       },
     };
+
     await launchImageLibrary(options, res => {
       if (res.didCancel) {
         console.log('Access gallery denied');
@@ -80,13 +81,29 @@ const AddMenu = () => {
         console.log('Something wrong at ImagePicker', res.errorMessage);
       } else {
         if (res.assets && res.assets.length > 0) {
+          const selectedImage = res.assets[0];
+
           if (
-            res.assets[0].type === 'image/png' ||
-            res.assets[0].type === 'image/jpeg'
+            selectedImage.type === 'image/png' ||
+            selectedImage.type === 'image/jpeg'
           ) {
-            setPicture(res.assets[0]);
+            if (selectedImage.fileSize <= 2 * 1024 * 1024) {
+              setPicture(selectedImage);
+            } else {
+              console.log('File size too large (max 2 MB)');
+              Toast.show({
+                type: 'error',
+                text1: 'Size to large',
+                text2: 'Image size too large (max 2 MB)',
+              });
+            }
           } else {
             console.log('Invalid image file type');
+            Toast.show({
+              type: 'error',
+              text1: 'Invalid File',
+              text2: 'File must be JPG/PNG/JPEG',
+            });
           }
         }
       }

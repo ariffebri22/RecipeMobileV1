@@ -2,8 +2,7 @@ import axios from 'axios';
 import Toast from 'react-native-toast-message';
 import {logout} from './auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const base_url = 'https://weak-blue-cape-buffalo-cap.cyclic.app/';
+import {API_URL} from '@env';
 
 export const getMenu = () => async dispatch => {
   try {
@@ -18,7 +17,7 @@ export const getMenu = () => async dispatch => {
 
     dispatch({type: 'GET_MENU_REQUEST'});
 
-    const response = await axios.get(base_url + 'recipe', {headers});
+    const response = await axios.get(`${API_URL}recipe`, {headers});
 
     if (response.data && response.data.message) {
       dispatch({type: 'GET_MENU_SUCCESS', payload: response.data});
@@ -60,7 +59,7 @@ export const getMenuDetails = id => async dispatch => {
 
     dispatch({type: 'GET_MENU_DETAILS_REQUEST'});
 
-    const response = await axios.get(base_url + `recipe/${id}`, {headers});
+    const response = await axios.get(`${API_URL}recipe/${id}`, {headers});
 
     if (response.data && response.data.message) {
       dispatch({type: 'GET_MENU_DETAILS_SUCCESS', payload: response.data});
@@ -102,7 +101,7 @@ export const getMenuUsers = id => async dispatch => {
 
     dispatch({type: 'GET_MENU_USERS_REQUEST'});
 
-    const response = await axios.get(base_url + `recipe/users/${id}`, {
+    const response = await axios.get(`${API_URL}recipe/users/${id}`, {
       headers,
     });
 
@@ -149,7 +148,7 @@ export const deleteRecipe = id => async dispatch => {
 
     dispatch({type: 'DELETE_MENU_REQUEST'});
 
-    const response = await axios.delete(base_url + `recipe/${id}`, {headers});
+    const response = await axios.delete(`${API_URL}recipe/${id}`, {headers});
 
     if (response.data && response.data.message) {
       dispatch({type: 'DELETE_MENU_SUCCESS', payload: response.data});
@@ -197,7 +196,7 @@ export const addRecipe = dataREcipe => async dispatch => {
 
     dispatch({type: 'POST_RECIPE_REQUEST'});
 
-    const result = await axios.post(base_url + `recipe`, dataREcipe, {
+    const result = await axios.post(`${API_URL}recipe`, dataREcipe, {
       headers,
     });
     console.log('result', result);
@@ -252,7 +251,7 @@ export const updateMenu = (id, data) => async dispatch => {
 
     dispatch({type: 'PUT_RECIPE_REQUEST'});
 
-    const result = await axios.put(base_url + `recipe/${id}`, data, {
+    const result = await axios.put(`${API_URL}recipe/${id}`, data, {
       headers,
     });
     console.log('result', result);
@@ -309,7 +308,7 @@ export const updateProfile = (id, data) => async dispatch => {
 
     dispatch({type: 'PUT_PROFILE_REQUEST'});
 
-    const result = await axios.put(base_url + `users/${id}`, data, {
+    const result = await axios.put(`${API_URL}users/${id}`, data, {
       headers,
     });
     console.log('result', result);
