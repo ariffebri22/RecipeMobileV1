@@ -35,6 +35,7 @@ function Home() {
   const handleCta = () => {
     navigation.navigate('SearchMenu');
   };
+
   return (
     <ScrollView style={styles.container}>
       <View
@@ -79,16 +80,32 @@ function Home() {
           style={styles.carousel}
           showsHorizontalScrollIndicator={false}>
           <View style={styles.box}>
-            <BackgroundImage source={ImgGado} style={styles.Img} />
-            <Text style={styles.textImg}>Gado-gado</Text>
+            <TouchableOpacity
+              style={styles.Img}
+              onPress={() => navigation.navigate('DetailMenu', {itemId: 137})}>
+              <BackgroundImage source={ImgGado} style={styles.Img} />
+              <Text style={styles.textImg}>Gado-gado</Text>
+            </TouchableOpacity>
           </View>
+
           <View style={styles.box}>
-            <BackgroundImage source={ImgNasgor} style={styles.Img} />
-            <Text style={styles.textImg}>Nasi Goreng</Text>
+            <TouchableOpacity
+              style={styles.Img}
+              onPress={() => navigation.navigate('DetailMenu', {itemId: 138})}>
+              <BackgroundImage source={ImgNasgor} style={styles.Img}>
+                <Text style={styles.textImg}>Nasi Goreng</Text>
+              </BackgroundImage>
+            </TouchableOpacity>
           </View>
+
           <View style={styles.box}>
-            <BackgroundImage source={ImgSate} style={styles.Img} />
-            <Text style={styles.textImg}>Sate Ayam</Text>
+            <TouchableOpacity
+              style={styles.Img}
+              onPress={() => navigation.navigate('DetailMenu', {itemId: 187})}>
+              <BackgroundImage source={ImgSate} style={styles.Img}>
+                <Text style={styles.textImg}>Sate Ayam</Text>
+              </BackgroundImage>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>
@@ -140,37 +157,49 @@ function Home() {
           style={styles.carousel}
           showsHorizontalScrollIndicator={false}>
           <View style={styles.box1}>
-            <BackgroundImage source={ImgParfrait} style={styles.Img1} />
-            <View style={styles.headTitle}>
-              <Text style={{fontSize: 16, fontWeight: '900', marginLeft: 10}}>
-                Parfrait Fruit
-              </Text>
-              <Text style={{fontSize: 12, fontWeight: '500', marginLeft: 10}}>
-                Parfaits are made of fruit...
-              </Text>
-            </View>
+            <TouchableOpacity
+              onPress={() => navigation.push('DetailMenu', {itemId: 124})}
+              style={styles.Img1}>
+              <BackgroundImage source={ImgParfrait} style={styles.Img1} />
+              <View style={styles.headTitle}>
+                <Text style={{fontSize: 16, fontWeight: '900', marginLeft: 10}}>
+                  Parfrait Fruit
+                </Text>
+                <Text style={{fontSize: 12, fontWeight: '500', marginLeft: 10}}>
+                  Parfaits are made of fruit...
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.box1}>
-            <BackgroundImage source={ImgStrawbery} style={styles.Img1} />
-            <View style={styles.headTitle}>
-              <Text style={{fontSize: 16, fontWeight: '900', marginLeft: 10}}>
-                Strawberry Shortcake
-              </Text>
-              <Text style={{fontSize: 12, fontWeight: '500', marginLeft: 10}}>
-                This Shortcake made with...
-              </Text>
-            </View>
+            <TouchableOpacity
+              onPress={() => navigation.push('DetailMenu', {itemId: 133})}
+              style={styles.Img1}>
+              <BackgroundImage source={ImgStrawbery} style={styles.Img1} />
+              <View style={styles.headTitle}>
+                <Text style={{fontSize: 16, fontWeight: '900', marginLeft: 10}}>
+                  Strawberry Shortcake
+                </Text>
+                <Text style={{fontSize: 12, fontWeight: '500', marginLeft: 10}}>
+                  This Shortcake made with...
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.box1}>
-            <BackgroundImage source={ImgSpagheti} style={styles.Img1} />
-            <View style={styles.headTitle}>
-              <Text style={{fontSize: 16, fontWeight: '900', marginLeft: 10}}>
-                Spaghetti Carbonara
-              </Text>
-              <Text style={{fontSize: 12, fontWeight: '500', marginLeft: 10}}>
-                Delicious health food is...
-              </Text>
-            </View>
+            <TouchableOpacity
+              style={styles.Img1}
+              onPress={() => navigation.push('DetailMenu', {itemId: 132})}>
+              <BackgroundImage source={ImgSpagheti} style={styles.Img1} />
+              <View style={styles.headTitle}>
+                <Text style={{fontSize: 16, fontWeight: '900', marginLeft: 10}}>
+                  Spaghetti Carbonara
+                </Text>
+                <Text style={{fontSize: 12, fontWeight: '500', marginLeft: 10}}>
+                  Delicious health food is...
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>
@@ -241,12 +270,14 @@ const styles = StyleSheet.create({
     width: 260,
     height: 158,
     position: 'absolute',
+    justifyContent: 'flex-end',
   },
 
   Img1: {
     width: 180,
     height: 140,
     position: 'absolute',
+    justifyContent: 'flex-end',
   },
 
   textImg: {

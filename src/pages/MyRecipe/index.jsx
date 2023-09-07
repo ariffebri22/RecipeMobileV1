@@ -197,7 +197,9 @@ const MyRecipe = () => {
       </View>
 
       {isError ? (
-        <Text>Recipe not found</Text>
+        <Text style={{textAlign: 'center', marginTop: 300}}>
+          Recipe not found
+        </Text>
       ) : (
         <View style={styles.content}>
           {data.data && data.data.length > 0 ? (
@@ -217,7 +219,9 @@ const MyRecipe = () => {
               )}
             />
           ) : (
-            <Text>Recipe not found</Text>
+            <Text style={{textAlign: 'center', marginTop: 300}}>
+              Recipe not found
+            </Text>
           )}
         </View>
       )}
