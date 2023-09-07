@@ -11,6 +11,7 @@ import EditMenu from './EditMenu';
 import EditProfile from './EditProfile';
 import SavedRecipe from './SavedRecipe';
 import LikedRecipe from './LikedRecipe';
+import StartScreen from './StartScreen';
 
 export {
   AddMenu,
@@ -26,4 +27,5 @@ export {
   EditProfile,
   SavedRecipe,
   LikedRecipe,
+  StartScreen,
 };

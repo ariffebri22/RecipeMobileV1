@@ -34,6 +34,8 @@ import IconLike from './IconLike.png';
 import IconLikeActive from './IconLikeActive.png';
 import Hello from './Hello.png';
 import iconuser from './iconuser.png';
+import ImgStartScreen from './startScreen.png';
+import IconStart from './IconStart.png';
 
 export {
   LogoMama,
@@ -72,4 +74,6 @@ export {
   IconLikeActive,
   Hello,
   iconuser,
+  ImgStartScreen,
+  IconStart,
 };

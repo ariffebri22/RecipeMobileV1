@@ -92,9 +92,7 @@ const Items = ({id, photo, title, category, creator, creator_photo}) => {
                 marginTop: 15,
               }}>
               <Image
-                source={{
-                  uri: creator_photo !== null ? creator_photo : ImgProfile,
-                }}
+                source={{uri: creator_photo}}
                 style={{height: 28, width: 28, borderRadius: 50}}
               />
               <Text style={{marginLeft: 5}}>{creator}</Text>

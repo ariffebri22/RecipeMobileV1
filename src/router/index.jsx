@@ -18,6 +18,7 @@ import {
   EditProfile,
   SavedRecipe,
   LikedRecipe,
+  StartScreen,
 } from '../pages';
 import {
   IconAddActive,
@@ -102,9 +103,14 @@ const Router = () => {
   const login = useSelector(state => state.login);
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Loginn">
+      <Stack.Navigator initialRouteName="StartScreen">
         {!login.data?.token ? (
           <>
+            <Stack.Screen
+              name="StartScreen"
+              component={StartScreen}
+              options={{headerShown: false}}
+            />
             <Stack.Screen
               name="Loginn"
               component={Loginn}

@@ -22,6 +22,7 @@
     "react-native-drawer-layout": "^3.2.1",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-image-picker": "^5.6.1",
+    "react-native-linear-gradient": "^2.8.3",
     "react-native-onesignal": "^4.5.1",
     "react-native-paper": "^5.10.3",
     "react-native-reanimated": "^3.4.2",
