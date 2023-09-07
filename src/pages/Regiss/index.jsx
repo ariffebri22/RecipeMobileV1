@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  ActivityIndicator,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {BgSplash, LogoMamaKecil} from '../../assets';
 import {ButtonCta} from '../../components';
@@ -14,7 +21,7 @@ const screenWidth = Dimensions.get('window').width;
 const Regiss = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const {messageError, isError} = useSelector(state => state.regis);
+  const {messageError, isError, isLoading} = useSelector(state => state.regis);
   const [isFocused, setIsFocused] = useState(false);
   const [inputData, setInputData] = useState({
     type: 'user',
@@ -120,7 +127,16 @@ const Regiss = () => {
       <View style={styles.forgotCover}>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </View>
-      <ButtonCta title="REGISTER" onPress={handleSubmit} />
+      <ButtonCta
+        title={
+          isLoading ? (
+            <ActivityIndicator size="small" color="#ffffff" />
+          ) : (
+            'REGISTER'
+          )
+        }
+        onPress={handleSubmit}
+      />
       <View style={styles.word}>
         <Text>
           <Text style={styles.dont}>Have an account? </Text>

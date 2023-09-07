@@ -1,13 +1,12 @@
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const base_url = 'https://weak-blue-cape-buffalo-cap.cyclic.app/';
+import {API_URL} from '@env';
 
 export const postlogin = (data, navigation) => async dispatch => {
   try {
     dispatch({type: 'LOGIN_REQUEST'});
-    const result = await axios.post(base_url + `users/login`, data);
+    const result = await axios.post(`${API_URL}users/login`, data);
     console.log('result data ', result.data);
     await AsyncStorage.setItem('token', result.data.token);
     result.data && dispatch({type: 'LOGIN_SUCCESS', payload: result.data});
@@ -35,7 +34,7 @@ export const logout = () => {
 export const register = (data, navigation) => async (dispatch, getState) => {
   try {
     dispatch({type: 'REGISTER_REQUEST'});
-    const result = await axios.post(base_url + `users`, data);
+    const result = await axios.post(`${API_URL}users`, data);
     console.log('result data ', result.data);
     result.data &&
       dispatch({type: 'REGISTER_SUCCESS', payload: result.data.message});
